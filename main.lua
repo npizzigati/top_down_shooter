@@ -1,5 +1,6 @@
 function love.load(arg)
   -- comment
+  -- another comment
   sprites = {}
   sprites.player = love.graphics.newImage('sprites/player.png')
   sprites.background = love.graphics.newImage('sprites/background.png')
