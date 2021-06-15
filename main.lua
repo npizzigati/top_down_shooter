@@ -1,4 +1,5 @@
 function love.load(arg)
+  -- comment
   sprites = {}
   sprites.player = love.graphics.newImage('sprites/player.png')
   sprites.background = love.graphics.newImage('sprites/background.png')
@@ -51,12 +52,12 @@ function updateZombies(dt)
   local count = 1
   local numberOfZombies = #zombies
   while count <= numberOfZombies and stop == false do
-    z = zombies[count]    
+    z = zombies[count]
     local angle = getZombieAngle(z)
     z.x = z.x + math.cos(angle) * z.speed * dt
     z.y = z.y + math.sin(angle) * z.speed * dt
     count = count + 1
-    
+
     if distanceBetween(z.x, z.y, player.x, player.y) < 30 then
       stop = true
       -- local count = 1
@@ -105,7 +106,7 @@ function spawnZombies()
    local zombie = {}
    zombie.x = math.random(0, love.graphics.getWidth())
    zombie.y = math.random(0, love.graphics.getHeight())
-   zombie.speed = 50 
+   zombie.speed = 50
    table.insert(zombies, zombie)
 end
 
@@ -123,9 +124,9 @@ end
 function drawZombies()
   local count = 1
   local numberOfZombies = #zombies
-  
+
   while count <= numberOfZombies do
-    love.graphics.draw(sprites.zombie, zombies[count].x, zombies[count].y, getZombieAngle(zombies[count]), nil, nil, sprites.zombie:getWidth()/2, sprites.zombie:getHeight()/2) 
+    love.graphics.draw(sprites.zombie, zombies[count].x, zombies[count].y, getZombieAngle(zombies[count]), nil, nil, sprites.zombie:getWidth()/2, sprites.zombie:getHeight()/2)
     count = count + 1
   end
 end
@@ -133,7 +134,7 @@ end
 function drawBullets()
   local i = 1
   while i <= #bullets do
-    love.graphics.draw(sprites.bullet, bullets[i].x, bullets[i].y, nil, 0.5, nil, sprites.bullet:getWidth()/2, sprites.bullet:getHeight()/2) 
+    love.graphics.draw(sprites.bullet, bullets[i].x, bullets[i].y, nil, 0.5, nil, sprites.bullet:getWidth()/2, sprites.bullet:getHeight()/2)
     i = i + 1
   end
 end
