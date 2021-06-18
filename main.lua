@@ -36,7 +36,17 @@ function love.update(dt)
 
   updateZombies(dt)
   updateBullets(dt)
+  delBullets(dt)
 
+end
+
+function delBullets(dt)
+  for i=#bullets, 1, -1 do
+    local b = bullets[i]
+    if b.x < 0 or b.y < 0 or b.y > 1000 or b.x > 1000 then
+      table.remove(bullets, i)
+    end
+  end
 end
 
 function love.draw()
