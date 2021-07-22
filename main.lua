@@ -10,7 +10,7 @@ function love.load(arg)
   player = {}
   player.x = love.graphics.getWidth() / 2
   player.y = love.graphics.getHeight() / 2
-  player.speed = 180
+  player.speed = 250
 
   stop = false
 
@@ -136,9 +136,30 @@ end
 
 function spawnZombies()
    local zombie = {}
-   zombie.x = math.random(0, love.graphics.getWidth())
-   zombie.y = math.random(0, love.graphics.getHeight())
-   zombie.speed = 50
+   --zombie.x = math.random(0, love.graphics.getWidth())
+   local side = math.random(1, 4)
+   if side == 1 then
+     zombie.x = 0
+     zombie.y = math.random(0, love.graphics.getHeight())
+   end
+
+   if side == 2 then
+     zombie.y = 0
+     zombie.x = math.random(0, love.graphics.getWidth())
+   end
+
+   if side == 3 then
+     zombie.y = love.graphics.getHeight()
+     zombie.x = math.random(0, love.graphics.getWidth())
+   end
+
+   if side == 4 then
+     zombie.x = love.graphics.getWidth()
+     zombie.y = math.random(0, love.graphics.getHeight())
+   end
+
+
+   zombie.speed = 75
    zombie.dead = false
    table.insert(zombies, zombie)
 end
