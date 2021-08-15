@@ -10,7 +10,10 @@ function love.load(arg)
   player = {}
   player.x = love.graphics.getWidth() / 2
   player.y = love.graphics.getHeight() / 2
-  player.speed = 250
+  player.speed = 500
+
+  maxtime = 2
+  timer = maxtime
 
   stop = false
 
@@ -24,13 +27,13 @@ function love.load(arg)
 end
 
 function love.update(dt)
-  if love.keyboard.isDown('d') then
+  if love.keyboard.isDown('s') then
     player.x = player.x + player.speed * dt
   elseif love.keyboard.isDown('a') then
     player.x = player.x - player.speed * dt
   elseif love.keyboard.isDown('w') then
     player.y = player.y - player.speed * dt
-  elseif love.keyboard.isDown('s') then
+  elseif love.keyboard.isDown('r') then
     player.y = player.y + player.speed * dt
   end
 
@@ -38,6 +41,13 @@ function love.update(dt)
   updateBullets(dt)
   delBullets(dt)
   collideBullets(dt)
+
+  if timer <= 0 then
+    spawnZombies()
+    maxtime = 0.70 * maxtime
+    timer = maxtime
+  end
+  timer = timer - dt
 
 end
 
