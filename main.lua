@@ -11,6 +11,7 @@ function love.load(arg)
   player.x = love.graphics.getWidth() / 2
   player.y = love.graphics.getHeight() / 2
   player.speed = 500
+  player.lives = 3
 
   maxtime = 2
   timer = maxtime
@@ -76,8 +77,7 @@ function love.draw()
   drawPlayer()
   drawZombies()
   drawBullets()
-  love.graphics.print(debugAngle)
-  love.graphics.print(message, 0, 10)
+  love.graphics.print(player.lives)
   cleanUp()
 end
 
@@ -101,13 +101,18 @@ function updateZombies(dt)
     count = count + 1
 
     if distanceBetween(z.x, z.y, player.x, player.y) < 30 then
-      stop = true
+      player.lives = player.lives - 1
+      player.speed = player.speed + 50
+      if player.lives == 0 then
+        stop = true
+      end
+      z.dead = true
       -- local count = 1
       -- while count <= #zombies do
       --    zombies[count] = nil
       --    count = count + 1
       -- end
-      zombies = {}
+--      zombies = {}
     end
   end
 end
@@ -189,7 +194,9 @@ function drawBullets()
 end
 
 function drawPlayer()
+  love.graphics.setColor(255, 0, 0)
   love.graphics.draw(sprites.player, player.x, player.y, getPlayerAngle(), nil, nil, sprites.player:getWidth()/2, sprites.player:getHeight()/2)
+  love.graphics.setColor(0, 0, 0)
 end
 
 function distanceBetween(x1, y1, x2, y2)
